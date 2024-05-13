@@ -7,7 +7,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { updateUserStart, updateUserFailure, updateUserSuccess } from '../redux/user/userSlice.js';
+import { updateUserStart, updateUserFailure, updateUserSuccess, deletUserFailure, deletUserStart, deletUserSuccess } from '../redux/user/userSlice.js';
 import { useDispatch } from 'react-redux';
 
 
@@ -48,6 +48,7 @@ export default function Profile() {
         setFilePerc(Math.round(progress));
       },
       (error) => {
+        console.log(error)
         setFileUploadError(true);
       },
       () => {
@@ -85,6 +86,24 @@ export default function Profile() {
       dispatch(updateUserFailure(error.message));
     }
   };
+
+  const handleDelete = async ()=>{
+    try {
+      dispatch(deletUserStart())
+      const res = await fetch(`api/user/delete/${currentUser._id}`,{
+        method:"DELETE",
+      })
+      const data = res.json();
+      if (data.success == false){
+        dispatch(deletUserFailure(data.message))
+        return;
+      }
+      dispatch(deletUserSuccess(data))
+    } catch (error) {
+      dispatch(deletUserFailure(error.message))
+    }
+  }
+
 
   return (
     <div className='p-3 max-w-lg mx-auto'>
@@ -142,7 +161,7 @@ export default function Profile() {
         </button>
       </form>
       <div className='flex justify-between mt-5'>
-        <span className='text-red-700 cursor-pointer'>Delete account</span>
+        <span onClick={handleDelete} className='text-red-700 cursor-pointer'>Delete account</span>
         <span className='text-red-700 cursor-pointer'>Sign out</span>
       </div>
       <p className='text-red-700 mt-5'>{error? "請重新登入": ""}</p>
