@@ -123,18 +123,18 @@ export default function Search() {
       <div className='p-7 border-b-2 sm:border-r-2 md:min-h-screen'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
           <div className='flex items-center gap-2'>
-            <label className='whitespace-nowrap font-semibold'>Search Term:</label>
+            <label className='whitespace-nowrap font-semibold'>搜尋建案:</label>
             <input
               type='text'
               id='searchTerm'
-              placeholder='Search...'
+              placeholder='搜尋...'
               className='border rounded-lg p-3 w-full'
               value={sideBarData.searchTerm}
               onChange={handleChange}
             />
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Type:</label>
+            <label className='font-semibold'>分類:</label>
             <div className='flex gap-2'>
               <input
                 type='checkbox'
@@ -143,7 +143,7 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sideBarData.type === 'all'}
               />
-              <span>Rent & Sale</span>
+              <span>租 & 售</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -153,7 +153,7 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sideBarData.type === 'rent'}
               />
-              <span>Rent</span>
+              <span>出租</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -163,7 +163,7 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sideBarData.type === 'sale'}
               />
-              <span>Sale</span>
+              <span>出售</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -173,11 +173,11 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sideBarData.offer}
               />
-              <span>Offer</span>
+              <span>預售屋</span>
             </div>
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Amenities:</label>
+            <label className='font-semibold'>附加:</label>
             <div className='flex gap-2'>
               <input
                 type='checkbox'
@@ -186,7 +186,7 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sideBarData.parking}
               />
-              <span>Parking</span>
+              <span>停車位</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -196,7 +196,7 @@ export default function Search() {
                 onChange={handleChange}
                 checked={sideBarData.furnished}
               />
-              <span>Furnished</span>
+              <span>家具</span>
             </div>
           </div>
           <div className='flex items-center gap-2'>
@@ -207,22 +207,22 @@ export default function Search() {
               id='sort_order'
               className='border rounded-lg p-3'
             >
-              <option value='regularPrice_desc'>Price high to low</option>
-              <option value='regularPrice_asc'>Price low to high</option>
-              <option value='createdAt_desc'>Latest</option>
-              <option value='createdAt_asc'>Oldest</option>
+              <option value='regularPrice_desc'>價格高至低</option>
+              <option value='regularPrice_asc'>價格低至高</option>
+              <option value='createdAt_desc'>最新</option>
+              <option value='createdAt_asc'>最舊</option>
             </select>
           </div>
           <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
-            Search
+            搜尋
           </button>
         </form>
       </div>
       <div >
-        <h1 className='text-3xl font-semibold border-b p-3'>Listing results:</h1>
+        <h1 className='text-3xl font-semibold border-b p-3'>搜尋結果:</h1>
         <div className='p-7 flex flex-wrap gap-4'>
         {!loading &&listings.length === 0 &&(
-            <p className='text-xl text-slate-700'>No Listing Found</p>
+            <p className='text-xl text-slate-700'>查無資料</p>
         ) }
         {loading && (
             <p className='text-xl text-slate-700'>Loading</p>
@@ -232,7 +232,7 @@ export default function Search() {
         ))}
         {showMore && (
           <button className='text-green-700 hover:underline text-center w-full' onClick={onShowMoreClick}>
-            Show more
+            顯示更多
           </button>
         )}
         </div>

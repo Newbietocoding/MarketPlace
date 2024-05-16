@@ -154,7 +154,7 @@ export default function Profile() {
 
   return (
     <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
+      <h1 className='text-3xl font-semibold text-center my-7'>個人資料</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
           onChange={(e) => setFile(e.target.files[0])}
@@ -172,12 +172,12 @@ export default function Profile() {
         <p className='text-sm self-center'>
           {fileUploadError ? (
             <span className='text-red-700'>
-              Error Image upload (image must be less than 2 mb)
+              相片過大！
             </span>
           ) : filePerc > 0 && filePerc < 100 ? (
             <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
           ) : filePerc === 100 ? (
-            <span className='text-green-700'>Image successfully uploaded!</span>
+            <span className='text-green-700'>上傳成功</span>
           ) : (
             ''
           )}
@@ -204,23 +204,23 @@ export default function Profile() {
           onChange={handleChange}
         />
         <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>
-          {loading ? 'Loading...' : 'Update'}
+          {loading ? 'Loading...' : '更新'}
         </button>
-        <Link className=' bg-green-700 text-white rounded-lg p-3 uppercase hover:opacity-95 ' to={"/create-listing"}>
-          Create Listing
+        <Link className=' bg-green-700 text-white rounded-lg p-3 uppercase hover:opacity-95 text-center ' to={"/create-listing"}>
+          新增物件
         </Link>
       </form>
       <div className='flex justify-between mt-5'>
-        <span onClick={handleDelete} className='text-red-700 cursor-pointer'>Delete account</span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>Sign out</span>
+        <span onClick={handleDelete} className='text-red-700 cursor-pointer'>刪除賬號</span>
+        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>登出</span>
       </div>
       <p className='text-red-700 mt-5'>{error? "請重新登入": ""}</p>
       <p className=' text-green-700 mt-5'>{updateSuccess? "Success" :"" }</p>
-      <button onClick={handleShowListings} className='text-green-700 w-full'>Show listing </button>
+      <button onClick={handleShowListings} className='text-green-700 w-full'>查看我的物件</button>
       <p className='text-red-700 mt-5'>{showListingsError ? 'Error show listings' : ''}</p>
       {userListings &&userListings.length > 0 && 
       <div className='flex flex-col gap-4'>
-        <h1 className='text-center mt-6 text-2xl font-semibold'>Your Listings</h1>
+        <h1 className='text-center mt-6 text-2xl font-semibold'>我的物件</h1>
         {userListings.map((listing)=>(
           <div key={listing._id} className='flex justify-between border rounded-lg  items-center p-3'>
             <Link to={`/listing/${listing._id}`}>
@@ -230,9 +230,9 @@ export default function Profile() {
               <p>{listing.name}</p>
             </Link>
             <div className='flex flex-col '>
-              <button onClick={()=>handleListingDelete(listing._id)} className='text-red-700 uppercase'>Delete</button>
+              <button onClick={()=>handleListingDelete(listing._id)} className='text-red-700 uppercase'>刪除</button>
               <Link to={`/update-listing/${listing._id}`}>
-                <button  className='text-green-700 uppercase'>Edit</button>
+                <button  className='text-green-700 uppercase'>編輯</button>
               </Link>
             </div>
           </div>

@@ -44,11 +44,11 @@ export default function CreateListing() {
                 setImageUploadError(false);
                 setUploading(false)
             }).catch((error)=>{
-                setImageUploadError('Image upload failed (2 mb per image')
+                setImageUploadError('相片最大2MB')
                 setUploading(false)
             })
         }else{
-            setImageUploadError("You can only upload 6 images")
+            setImageUploadError("最多上傳6張相片")
             setUploading(false)
         }
     }
@@ -108,10 +108,10 @@ export default function CreateListing() {
         e.preventDefault();
         try {
             if (formData.imageUrls.length < 1){
-                return setError("You must upload at least one image")
+                return setError("請上傳至少一張圖片")
             }
             if (+formData.regularPrice < +formData.discountPrice){
-                return setError("The discount Price must be lower the regular price ")
+                return setError("優惠價格必須低於一般價格")
             } 
             setLoading(true);
             setError(false)
@@ -139,15 +139,15 @@ export default function CreateListing() {
 
   return (
     <main className=' p-3 max-w-4xl mx-auto '>
-        <h1 className=' text-3xl font-semibold text-center my-7'>Create Listing</h1>
+        <h1 className=' text-3xl font-semibold text-center my-7'>新增物件</h1>
         <form onSubmit={handleSubmit} className=' flex flex-col sm:flex-row gap-4 '>
             <div className=' flex flex-col gap-4 flex-1 '>
                 <input 
                 className=' border p-3 rounded-lg' 
                 maxLength={'62'} 
-                minLength={'10'} 
+                minLength={'2'} 
                 required type="text" 
-                placeholder='Name' 
+                placeholder='物件名稱' 
                 id="name" 
                 onChange={handleChange}
                 value={formData.name}
@@ -155,7 +155,7 @@ export default function CreateListing() {
                 <textarea 
                 className=' border p-3 rounded-lg' 
                  required type="text" 
-                 placeholder='Description' 
+                 placeholder='關於此屋' 
                  id="description" 
                 onChange={handleChange}
                 value={formData.description}
@@ -164,7 +164,7 @@ export default function CreateListing() {
                 className=' border p-3 rounded-lg' 
                 required 
                 type="text" 
-                placeholder='Address' 
+                placeholder='地址' 
                 id="address"
                 onChange={handleChange}
                 value={formData.address}
@@ -179,7 +179,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.type === "sale"} 
                         />
-                        <span>Sell</span>
+                        <span>出售</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -190,7 +190,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.type === "rent"} 
                          />
-                        <span>Rent</span>
+                        <span>出租</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -201,7 +201,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.parking} 
                          />
-                        <span>Parking</span>
+                        <span>停車位</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -212,7 +212,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.furnished} 
                         />
-                        <span>Furnished</span>
+                        <span>家具</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -223,7 +223,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.offer}     
                         />
-                        <span>Offer</span>
+                        <span>預售屋</span>
                     </div>
                 </div>
                 <div className=" flex flex-wrap gap-6">
@@ -267,7 +267,7 @@ export default function CreateListing() {
                         <div className=' flex flex-col items-center '>
                             <p>價格</p>
                             {formData.type === 'rent' &&(
-                                <span className='text-xs'>($ / month)</span>
+                                <span className='text-xs'>($ / 月)</span>
                             )}
                             
                         </div>
@@ -287,7 +287,7 @@ export default function CreateListing() {
                         <div className=' flex flex-col items-center '>
                             <p>優惠</p>
                             {formData.type === 'rent' &&(
-                                <span className='text-xs'>($ / month)</span>
+                                <span className='text-xs'>($ / 月)</span>
                             )}
                         </div>
                     </div>) }
@@ -295,8 +295,8 @@ export default function CreateListing() {
             </div>  
             <div className="flex flex-col flex-1 gap-4">
                 <p>
-                    <span className="font-semibold">Images:</span>
-                    <span className="font-normal text-gray-600 ml-2">The first image will be the cover (Max 6)</span>
+                    <span className="font-semibold">相片:</span>
+                    <span className="font-normal text-gray-600 ml-2">第一張相片會是封面(最多 6張)</span>
                 </p>
                 <div className="gap-4 flex">
                     <input 
@@ -313,7 +313,7 @@ export default function CreateListing() {
                     disabled={uploading} 
                     onClick={handleImageSubmit} 
                     className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-85">
-                    {uploading? "Loading..." : "Upload"}
+                    {uploading? "Loading..." : "上傳"}
                     </button>
                 </div>
                 <p className="text-red-700 text-sm">{imageUploadError && imageUploadError}</p>
@@ -326,7 +326,7 @@ export default function CreateListing() {
                     ))
                 }
                 <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
-                {loading? "Loading" :"Create listing" }
+                {loading? "Loading" :"新增物件" }
                 </button>
                 {error && <p className="text-red-700 text-sm">{error}</p>}
             </div>

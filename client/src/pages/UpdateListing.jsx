@@ -58,11 +58,11 @@ export default function CreateListing() {
                 setImageUploadError(false);
                 setUploading(false)
             }).catch((error)=>{
-                setImageUploadError('Image upload failed (2 mb per image')
+                setImageUploadError('相片最大2MB')
                 setUploading(false)
             })
         }else{
-            setImageUploadError("You can only upload 6 images")
+            setImageUploadError("最多上傳6張相片")
             setUploading(false)
         }
     }
@@ -161,7 +161,7 @@ export default function CreateListing() {
                 maxLength={'62'} 
                 minLength={'10'} 
                 required type="text" 
-                placeholder='Name' 
+                placeholder='物件名稱' 
                 id="name" 
                 onChange={handleChange}
                 value={formData.name}
@@ -170,7 +170,7 @@ export default function CreateListing() {
                 className=' border p-3 rounded-lg' 
                  required type="text" 
                  placeholder='Description' 
-                 id="description" 
+                 id="關於此屋" 
                 onChange={handleChange}
                 value={formData.description}
                  />
@@ -179,7 +179,7 @@ export default function CreateListing() {
                 required 
                 type="text" 
                 placeholder='Address' 
-                id="address"
+                id="地址"
                 onChange={handleChange}
                 value={formData.address}
                 />
@@ -193,7 +193,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.type === "sale"} 
                         />
-                        <span>Sell</span>
+                        <span>出售</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -204,7 +204,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.type === "rent"} 
                          />
-                        <span>Rent</span>
+                        <span>出租</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -215,7 +215,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.parking} 
                          />
-                        <span>Parking</span>
+                        <span>車位</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -226,7 +226,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.furnished} 
                         />
-                        <span>Furnished</span>
+                        <span>家具</span>
                     </div>
                     <div className=' flex gap-2'>
                         <input 
@@ -237,7 +237,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         checked={formData.offer}     
                         />
-                        <span>Offer</span>
+                        <span>預售屋</span>
                     </div>
                 </div>
                 <div className=" flex flex-wrap gap-6">
@@ -281,7 +281,7 @@ export default function CreateListing() {
                         <div className=' flex flex-col items-center '>
                             <p>價格</p>
                             {formData.type === 'rent' &&(
-                                <span className='text-xs'>($ / month)</span>
+                                <span className='text-xs'>($ / 月)</span>
                             )}
                         </div>
                     </div>
@@ -300,7 +300,7 @@ export default function CreateListing() {
                         <div className=' flex flex-col items-center '>
                             <p>優惠</p>
                             {formData.type === 'rent' &&(
-                                <span className='text-xs'>($ / month)</span>
+                                <span className='text-xs'>($ / 月)</span>
                             )}
                         </div>
                     </div>) }
@@ -308,8 +308,8 @@ export default function CreateListing() {
             </div>  
             <div className="flex flex-col flex-1 gap-4">
                 <p>
-                    <span className="font-semibold">Images:</span>
-                    <span className="font-normal text-gray-600 ml-2">The first image will be the cover (Max 6)</span>
+                    <span className="font-semibold">相片:</span>
+                    <span className="font-normal text-gray-600 ml-2">第一張相片會是封面 (Max 6)</span>
                 </p>
                 <div className="gap-4 flex">
                     <input 
@@ -326,7 +326,7 @@ export default function CreateListing() {
                     disabled={uploading} 
                     onClick={handleImageSubmit} 
                     className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-85">
-                    {uploading? "Loading..." : "Upload"}
+                    {uploading? "Loading..." : "上傳"}
                     </button>
                 </div>
                 <p className="text-red-700 text-sm">{imageUploadError && imageUploadError}</p>
@@ -334,12 +334,12 @@ export default function CreateListing() {
                     formData.imageUrls.length > 0 && formData.imageUrls.map((url, index)=>(
                         <div key={url} className="flex justify-between p-3 border items-center">
                             <img src={url} alt="Pictures" className="w-20 h-20 object-contain rounded-lg" />
-                            <button type="button" onClick={()=>handleRemoveImage(index)} className="text-red-700 rounded-lg uppercase hover: opacity-95">Delete</button>
+                            <button type="button" onClick={()=>handleRemoveImage(index)} className="text-red-700 rounded-lg uppercase hover: opacity-95">刪除</button>
                         </div>
                     ))
                 }
                 <button disabled={loading || uploading} className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
-                {loading? "Loading" :"Update listing" }
+                {loading? "Loading" :"更新" }
                 </button>
                 {error && <p className="text-red-700 text-sm">{error}</p>}
             </div>

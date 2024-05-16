@@ -29,6 +29,6 @@ export default function OAuth() {
         }
     }
   return (
-    <button onClick={handleGoogleClick} type='button' className=' bg-red-600 text-white p-3 rounded-lg uppercase'>Continue with Google</button>
+    <button onClick={handleGoogleClick} type='button' className=' bg-red-600 text-white p-3 rounded-lg uppercase'>使用GOOGLE登入</button>
   )
 }
