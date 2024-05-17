@@ -1,53 +1,59 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-export default function Contact({listing}) {
-    const [landlord, setLandlord] = useState(null);
-    const [message, setMessage] = useState('')
-    const handleonChange = (e)=>{
-        setMessage(e.target.value)
-    }
-    useEffect(()=>{
-        const fetchLandlord = async ()=>{
-            try {
-                const res = await fetch(`/api/user/${listing.userRef}`)
-                const data = await res.json()
-                setLandlord(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchLandlord();
+export default function Contact({ listing }) {
+  const [landlord, setLandlord] = useState(null);
+  const [message, setMessage] = useState('');
 
-    },[listing.userRef])
+  const handleOnChange = (e) => {
+    setMessage(e.target.value);
+  };
 
+  useEffect(() => {
+    const fetchLandlord = async () => {
+      try {
+        const res = await fetch(`/api/user/${listing.userRef}`);
+        const data = await res.json();
+        setLandlord(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchLandlord();
+  }, [listing.userRef]);
 
   return (
     <>
       {landlord && (
         <div className="flex flex-col gap-2">
-            <p>Contact 
-            <span className="font-semibold">
-                {landlord.username}
-            </span>
-            </p>
-            <textarea 
+          <p>Contact 
+            <span className="font-semibold"> {landlord.username}</span>
+          </p>
+          <textarea 
             name="message" 
             id="message" 
-            rows={'2'} 
+            rows="2" 
             value={message} 
-            onChange={(handleonChange)}
+            onChange={handleOnChange}
             placeholder="Enter your message here..."
             className="w-full border p-3 rounded-lg"
-            >
-            </textarea>
-            <Link className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
-            to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`
-            }>
-                Send Message
-            </Link>
+          />
+          <Link 
+            className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
+            to={`mailto:${landlord.email}?subject=${encodeURIComponent(`Regarding ${listing.name}`)}&body=${encodeURIComponent(message)}`}
+          >
+            Send Message
+          </Link>
         </div>
-      )}  
+      )}
     </>
-  )
+  );
 }
+
+Contact.propTypes = {
+  listing: PropTypes.shape({
+    userRef: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
