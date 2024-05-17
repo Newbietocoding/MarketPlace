@@ -11,8 +11,8 @@ import {
   FaChair,
   FaMapMarkerAlt,
   FaParking,
-  FaShare,
 } from 'react-icons/fa';
+import { IoShareSharp } from "react-icons/io5";
 import Contact from '../components/Contact';
 
 
@@ -70,14 +70,14 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
-            <FaShare
-              className='text-slate-500'
+          <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-7 h-7 flex justify-center items-center bg-slate-100 cursor-pointer hover:opacity-95'>
+            <IoShareSharp 
+              className='text-slate-500 h-10 w-10'
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
                 setCopied(true);
                 setTimeout(() => {
-                  setCopied(false);
+                  setCopied(false)
                 }, 2000);
               }}
             />

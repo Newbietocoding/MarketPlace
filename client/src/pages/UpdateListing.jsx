@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import {useNavigate, useParams} from "react-router-dom"
 
 
-export default function CreateListing() {
+export default function UpdateListing() {
     const {currentUser} = useSelector(state=>state.user)
     const [formData, setFormData] = useState({
         imageUrls: [],
@@ -153,7 +153,7 @@ export default function CreateListing() {
 
   return (
     <main className=' p-3 max-w-4xl mx-auto '>
-        <h1 className=' text-3xl font-semibold text-center my-7'>Update Listing</h1>
+        <h1 className=' text-3xl font-semibold text-center my-7'>更新物件</h1>
         <form onSubmit={handleSubmit} className=' flex flex-col sm:flex-row gap-4 '>
             <div className=' flex flex-col gap-4 flex-1 '>
                 <input 
@@ -161,7 +161,7 @@ export default function CreateListing() {
                 maxLength={'62'} 
                 minLength={'10'} 
                 required type="text" 
-                placeholder='物件名稱' 
+                placeholder='關於此屋' 
                 id="name" 
                 onChange={handleChange}
                 value={formData.name}
@@ -170,7 +170,7 @@ export default function CreateListing() {
                 className=' border p-3 rounded-lg' 
                  required type="text" 
                  placeholder='Description' 
-                 id="關於此屋" 
+                 id="description" 
                 onChange={handleChange}
                 value={formData.description}
                  />
@@ -178,8 +178,8 @@ export default function CreateListing() {
                 className=' border p-3 rounded-lg' 
                 required 
                 type="text" 
-                placeholder='Address' 
-                id="地址"
+                placeholder='地址' 
+                id="address"
                 onChange={handleChange}
                 value={formData.address}
                 />
@@ -309,7 +309,7 @@ export default function CreateListing() {
             <div className="flex flex-col flex-1 gap-4">
                 <p>
                     <span className="font-semibold">相片:</span>
-                    <span className="font-normal text-gray-600 ml-2">第一張相片會是封面 (Max 6)</span>
+                    <span className="font-normal text-gray-600 ml-2">第一張相片會是封面 (最多 6)</span>
                 </p>
                 <div className="gap-4 flex">
                     <input 

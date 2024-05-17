@@ -200,17 +200,17 @@ export default function Search() {
             </div>
           </div>
           <div className='flex items-center gap-2'>
-            <label className='font-semibold'>Sort:</label>
+            <label className='font-semibold'>分類</label>
             <select
               onChange={handleChange}
               defaultValue={'created_at_desc'}
               id='sort_order'
               className='border rounded-lg p-3'
             >
-              <option value='regularPrice_desc'>價格高至低</option>
-              <option value='regularPrice_asc'>價格低至高</option>
               <option value='createdAt_desc'>最新</option>
               <option value='createdAt_asc'>最舊</option>
+              <option value='regularPrice_desc'>價格高至低</option>
+              <option value='regularPrice_asc'>價格低至高</option>
             </select>
           </div>
           <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
