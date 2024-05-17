@@ -35,7 +35,7 @@ const Home = () => {
     <div>
       <div>
         <img className=' h-96 w-full object-cover' src={Image02} alt="" />
-        <p className='absolute top-[33%] left-[13%] text-5xl font-semibold'>找到您理想的房子</p>
+        <p className='absolute top-[33%] left-[13%] text-5xl font-semibold'>探索好屋</p>
         <Link className='absolute top-[43%] left-[13%] text-3xl font-semibold text-white hover:underline' to={'/search'}>現在開始</Link>
       </div>
       <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'>
